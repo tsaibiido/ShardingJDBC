@@ -3,7 +3,7 @@ package com.chungyo.sharding.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
-public class ChauDan {
+public class ChauDan5 {
   @TableField("WagersID")
   private Long WagersID;
 
@@ -55,8 +55,8 @@ public class ChauDan {
   @TableField("ModifiedDate")
   private String ModifiedDate;
 
-  public static ChauDan build() {
-    ChauDan ret = new ChauDan();
+  public static ChauDan5 build() {
+    ChauDan5 ret = new ChauDan5();
     ret.GameType = 5902;
     ret.WagersType = 0;
     ret.UserID = 129697721l;

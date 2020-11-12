@@ -13,20 +13,23 @@ import com.chungyo.sharding.demo.mapper.ChauDanMapper;
 
 @RestController
 public class Page2Controller {
-	@Autowired ChauDanMapper chauDanMapper;
-	
-	@GetMapping(value="/addChauDan")
-	public void addCourse() {
-		
-	}
-	
-	@GetMapping(value="/chauDanSelect")
-	public int getCourseCount(@RequestParam(value="agid",required = true) String agid) {
-		QueryWrapper<ChauDan> wrapper = new QueryWrapper<>();
-	    wrapper.eq("AGID", agid);
-	    List<ChauDan> course = chauDanMapper.selectList(wrapper);
-	    System.out.println("chauDan Size:" + course.size());
-	    return course.size();
-	}
+  @Autowired ChauDanMapper chauDanMapper;
 
+  @GetMapping(value = "/addChauDan")
+  public int addCourse(@RequestParam(value = "agid", required = true) String agid) {
+    ChauDan chauDan = ChauDan.build();
+    chauDan.setAGID(Integer.parseInt(agid));
+    return chauDanMapper.insert(chauDan);
+  }
+
+  @GetMapping(value = "/chauDanSelect")
+  public int getCourseCount(@RequestParam(value = "agid", required = false) String agid) {
+    QueryWrapper<ChauDan> wrapper = new QueryWrapper<>();
+    if (agid != null) {
+      wrapper.eq("agid", Integer.parseInt(agid));
+    }
+    List<ChauDan> course = chauDanMapper.selectList(wrapper);
+    System.out.println("chauDan Size:" + course.size());
+    return course.size();
+  }
 }

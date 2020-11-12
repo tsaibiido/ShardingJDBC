@@ -10,7 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chungyo.sharding.demo.entity.ChauDan;
+import com.chungyo.sharding.demo.entity.ChauDan5;
 import com.chungyo.sharding.demo.entity.Course;
+import com.chungyo.sharding.demo.mapper.ChauDan5Mapper;
 import com.chungyo.sharding.demo.mapper.ChauDanMapper;
 import com.chungyo.sharding.demo.mapper.CouseMapper;
 
@@ -20,6 +22,7 @@ class ShardingJdbcApplicationTests {
 
   @Autowired private CouseMapper couseMapper;
   @Autowired private ChauDanMapper chaudanMapper;
+  @Autowired private ChauDan5Mapper chaudan5Mapper;
 
   @Test
   void addCourse() {
@@ -78,5 +81,14 @@ class ShardingJdbcApplicationTests {
     chauDan.setAGID(11);
 
     chaudanMapper.insert(chauDan);
+  }
+
+  @Test
+  void addChauDan5() {
+    ChauDan5 chauDan = ChauDan5.build();
+    chauDan.setAGID(26891);
+    chauDan.setUserID(2l);
+
+    chaudan5Mapper.insert(chauDan);
   }
 }

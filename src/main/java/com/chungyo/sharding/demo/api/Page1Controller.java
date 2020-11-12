@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -36,9 +37,11 @@ public class Page1Controller {
 	}
 	
 	@GetMapping(value="/countCourse")
-	public int getCourseCount() {
+	public int getCourseCount(@RequestParam(value = "cstatus", required = false) String cstatus) {
 		QueryWrapper<Course> wrapper = new QueryWrapper<>();
-	    wrapper.eq("cstatus", "Normal");
+		if(cstatus != null) {
+		    wrapper.eq("cstatus", cstatus);
+		}
 	    wrapper.orderBy(true, false, "user_id");
 	    List<Course> course = couseMapper.selectList(wrapper);
 	    System.out.println("Course Size:" + course.size());
